@@ -1,5 +1,5 @@
 div{
-    display: block;
+    /* display: block; */
 }
 
 body{
@@ -64,6 +64,7 @@ main{
     margin-top: 30px;
     border-radius: 5px;
     width: 80%;
+    height: 400px;
 }
 
 .mounth{
@@ -72,20 +73,60 @@ main{
     padding: 20px 20px 20px 50px;
 }
 
-.weeks{
-    padding: 40px 0 0;
+/* .name_weeks{
     display: flex;
-    justify-content: space-around;
-    display: -webkit-box;
-    text-align: center;
-}
+    justify-content: center;
+} */
 
-.inner{
+ .weeks_days .inner{        /*календарь*/
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     justify-content: space-around;
     line-height: 40px;
-    display: -webkit-box;
+    
 }
+
+@media (min-width: 992px){
+    .col-lg-4/*.stroka1, .stroka2*/{
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 33.33333%;
+        flex: 0 0 33.33333%;
+        max-width: 33.33333%;
+        min-width: 33%;
+    }
+}
+
+/* @media (min-width: 768px){
+    .name_weeks.stroka1, .stroka2{
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+        min-width: 50%;
+    }
+} */
+
+@media (min-width: 992px){
+    .col-lg-4{
+        float: left!important;
+    }
+}
+
+.day_name{
+    margin: 0 0 10px;
+    padding: 0 0 10px;
+}
+
+/* .stroka1{
+    display: flex;
+    justify-content: center;
+}
+
+.stroka2{
+    display: flex;
+    justify-content: center;
+} */
 
 .day_name{
     min-width: 30px;
@@ -104,9 +145,4 @@ main{
     text-align: center;
     font-size: 15px;
     border-radius: 50%;
-}
-
-*, :after, :before {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
 }
