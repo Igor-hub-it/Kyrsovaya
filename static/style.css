@@ -1,7 +1,3 @@
-div{
-    /* display: block; */
-}
-
 body{
     font-family: Raleway, sans-serif;
     font-size: 1rem;
@@ -73,11 +69,6 @@ main{
     padding: 20px 20px 20px 50px;
 }
 
-/* .name_weeks{
-    display: flex;
-    justify-content: center;
-} */
-
  .weeks_days .inner{        /*календарь*/
     display: -webkit-box;
     display: -ms-flexbox;
@@ -88,7 +79,7 @@ main{
 }
 
 @media (min-width: 992px){
-    .col-lg-4/*.stroka1, .stroka2*/{
+    .col-lg-4{
         -webkit-box-flex: 0;
         -ms-flex: 0 0 33.33333%;
         flex: 0 0 33.33333%;
@@ -97,15 +88,15 @@ main{
     }
 }
 
-/* @media (min-width: 768px){
-    .name_weeks.stroka1, .stroka2{
+@media (min-width: 768px){
+    .name_weeks{
         -webkit-box-flex: 0;
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
         min-width: 50%;
     }
-} */
+}
 
 @media (min-width: 992px){
     .col-lg-4{
@@ -117,16 +108,6 @@ main{
     margin: 0 0 10px;
     padding: 0 0 10px;
 }
-
-/* .stroka1{
-    display: flex;
-    justify-content: center;
-}
-
-.stroka2{
-    display: flex;
-    justify-content: center;
-} */
 
 .day_name{
     min-width: 30px;
@@ -145,4 +126,8 @@ main{
     text-align: center;
     font-size: 15px;
     border-radius: 50%;
+}
+
+.day:hover, .day:active{
+    color:aliceblue;
 }
