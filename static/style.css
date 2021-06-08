@@ -14,14 +14,12 @@ body{
     height: 40px;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 80%;
     background-color: #2c2c2c;
-    border: 0;
-    box-shadow: none;
     align-items: center;
     display: flex;
     position: relative;
-    padding: .5rem 1rem;
+    margin: auto;
 }
 
 .container{
@@ -60,7 +58,7 @@ main{
     margin-top: 30px;
     border-radius: 5px;
     width: 80%;
-    height: 400px;
+    height: 250px;
 }
 
 .mounth{
@@ -69,40 +67,47 @@ main{
     padding: 20px 20px 20px 50px;
 }
 
+.prev_mounth, .next_mounth{
+    font-size: 25px;
+}
+
+.prev_mounth:hover, .prev_mounth:active, .next_mounth:hover, .next_mounth:active{
+    cursor: pointer;
+}
+
  .weeks_days .inner{        /*календарь*/
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     justify-content: space-around;
     line-height: 40px;
-    
+    border-radius: 5px;
 }
 
 @media (min-width: 992px){
-    .col-lg-4{
+    .col-lg-3{
         -webkit-box-flex: 0;
         -ms-flex: 0 0 33.33333%;
         flex: 0 0 33.33333%;
-        max-width: 33.33333%;
-        min-width: 33%;
-    }
-}
-
-@media (min-width: 768px){
-    .name_weeks{
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 50%;
-        flex: 0 0 50%;
-        max-width: 50%;
-        min-width: 50%;
-    }
-}
-
-@media (min-width: 992px){
-    .col-lg-4{
+        min-width: 33.33333%;
         float: left!important;
     }
 }
+
+/* @media (min-width: 768px){
+    .week1, .week2{
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        min-width: 50%;
+    }
+} */
+
+/* @media (min-width: 768px){
+    .week3{
+        display: none;
+    }
+} */
 
 .day_name{
     margin: 0 0 10px;
@@ -129,5 +134,58 @@ main{
 }
 
 .day:hover, .day:active{
-    color:aliceblue;
+    background-color:aliceblue;
+    color: #2c2c2c;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.request_window{
+    margin-top: 30px!important;
+    padding-top: 15px;
+    width: 80%;
+    background-color: #2c2c2c;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
+    margin: auto;
+}
+
+.req{
+    border-radius: 15px;
+    background-color: #212121;
+    padding: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.requests{
+    padding: 20px;
+    margin: auto;
+    width: 97%;
+    height: 95%;
+}
+
+.top_of_req{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.req_maker{
+    margin-top: 30px!important;
+    width: 80%;
+    height: 300px;
+    background-color: #2c2c2c;
+    margin: auto;
+    padding: 20px;
+}
+
+.title_of_req{
+    width: 40%;
+    text-align: center;
+    background-color: #212121;
+    padding: 10px;
+    margin: auto;
+    border-radius: 7px;
 }
