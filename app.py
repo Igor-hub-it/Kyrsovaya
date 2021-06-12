@@ -5,8 +5,8 @@ from datetime import datetime, date
 app = Flask(__name__)
 
 @app.route('/',)
-def includs():
-    return render_template('includs.html')
+def includes():
+    return render_template('includes.html')
 
 if __name__ == "__main__":
     app.run()
