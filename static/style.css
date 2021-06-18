@@ -312,7 +312,7 @@ button.new_user:active, button.new_req:hover{
 }
 
 .place_to_comment{
-    /* width: 70%; */
+    width: 70%;
 }
 
 button.new_req{
