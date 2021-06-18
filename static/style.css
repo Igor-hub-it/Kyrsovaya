@@ -250,6 +250,7 @@ button.new_user:active, button.new_req:hover{
     margin: auto;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    padding-bottom: 20px;
 }
 
 @media (max-width: 992px){
