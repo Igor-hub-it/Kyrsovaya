@@ -23,7 +23,7 @@ function selectDate(day, month, year) {
         'Year' : year
     };
     drawCalendar(month,year);
-    calendarRequest(day, month, year);
+    calendarRequest(day, month + 1, year);
 }
 
 function countMonth(month) {
