@@ -23,6 +23,7 @@ function selectDate(day, month, year) {
         'Year' : year
     };
     drawCalendar(month,year);
+    calendarRequest(day, month, year);
 }
 
 function countMonth(month) {
@@ -45,7 +46,7 @@ function countYear(month, year) {
     return year;
 }
 
-function drawCalendar(month,year) {
+function drawCalendar(month, year) {
     let months = [countMonth(month - 1), countMonth(month + 1)];
     let years = [countYear(month - 1, year), countYear(month + 1, year)]
 
@@ -106,21 +107,45 @@ function drawCalendar(month,year) {
             '<div class="inner">\n';
         for (let j = 0; j < 7; ++j) {
             let num_day;
+            let className = 'day';
+            let param_month;
+            let param_year;
+
             if (index < start_day) {
                 num_day = totalDaysPrevMonth - (start_day - index - 1);
+                param_month = countMonth(month - 1);
+                param_year = countYear(month - 1, year);
             } else if (index >= totalDays + start_day) {
                 num_day = ++dayNextMonth;
+                param_month = countMonth(month + 1);
+                param_year = countYear(month + 1, year);
             } else {
                 num_day = ++day;
+                param_month = month;
+                param_year = year;
             }
-            tmp += '<div class="day">' + num_day + '</div>\n';
+            if (selectedDate.Day === num_day && selectedDate.Month === param_month &&
+                selectedDate.Year === param_year) {
+                className = 'selected_day'
+            }
+            let param_click = num_day + ', ' + param_month +', ' + param_year;
+            tmp += '<div class="'+ className + '" onclick="selectDate('+ param_click + ')">' +
+                num_day + '</div>\n';
             ++index;
         }
         tmp += '</div>\n';
         tmp += '</div>\n';
     }
     tmp += '</div>\n';
-    document.getElementById(CALENDAR_ID).innerHTML=tmp;
+    document.getElementById(CALENDAR_ID).innerHTML = tmp;
 }
 
 drawCalendar(selectedDate.Month, selectedDate.Year);
+
+/*function backToCurrentMonth() {
+    selectedDate = {
+        'Day': null,
+        'Month': new Date().getMonth(),
+        'Year': new Date().getFullYear()
+    };
+}*/
