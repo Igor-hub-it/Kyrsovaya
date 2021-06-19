@@ -230,6 +230,11 @@ button.new_user:active, button.new_req:hover{
     color: aliceblue;
     transition: 1s;
     cursor: pointer;
+    min-width: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 50%;
 }
 
 .request_window{
