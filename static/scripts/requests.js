@@ -11,3 +11,8 @@ function calendarRequest(day, month, year) {
     data.append('year', String(year))
     request.send(data);
 }
+
+
+function reqWindowRequest() {
+
+}
