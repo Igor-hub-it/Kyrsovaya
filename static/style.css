@@ -216,6 +216,7 @@ button.new_user:active, button.new_req:hover{
     text-align: center;
     font-size: 15px;
     border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0) 
 }
 
 .day:hover{
@@ -223,6 +224,7 @@ button.new_user:active, button.new_req:hover{
     color: #2c2c2c;
     transition: 1s;
     cursor: pointer;
+    border: 1px solid yellow;
 }
 
 .selected_day{
