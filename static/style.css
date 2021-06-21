@@ -307,7 +307,7 @@ button.new_user:active, button.new_req:hover{
     margin: auto;
     margin-top: 20px!important;
     padding-bottom: 15px!important;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .top_of_req{
