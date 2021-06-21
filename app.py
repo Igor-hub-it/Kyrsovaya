@@ -20,6 +20,11 @@ def includes():
     return render_template('includes.html')
 
 
+@app.route('/manual')
+def manual():
+    return render_template('manual.html')
+
+
 @app.route('/', methods=['CALENDAR', 'CREATE_REQ'])
 def includes_request():
     print(request.method)
