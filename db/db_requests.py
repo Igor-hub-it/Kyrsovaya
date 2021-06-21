@@ -21,23 +21,27 @@ def calendar_request_get(form: MultiDict):
         req = Requests.query.filter_by(id_dates=date.id).all()
         res = []
         for r in req:
-            res.append({'user': r.user, 'time': r.time[1:-1], 'pers_data': r.pers_data, 'comment': r.comment})
+            res.append({'user': r.user, 'time': r.time, 'pers_data': r.pers_data, 'comment': r.comment})
         print(res)
         return {MessagesEnum.success: True, "requests": res}
     return {MessagesEnum.success: False}
 
 
 def calendar_request_set(form: MultiDict):
-    date = Dates.query.filter_by(date=form.get('date')).first()
+    full_date_time = form.get('date').split(' ')
+    print(full_date_time)
+    date = Dates.query.filter_by(date=full_date_time[0]).first()
     if not date:
-        date = Dates(date=form.get('date'))
+        date = Dates(date=full_date_time[0])
         db.session.add(date)
         db.session.commit()
-    req = Requests.query.filter_by(id_dates=date.id, user=form.get('user'), time=form.get('time')).first()
+    print(date.id)
+    # date = Dates.query.filter_by(date=full_date_time[0]).first()
+    req = Requests.query.filter_by(id_dates=date.id, user=form.get('user'), time=full_date_time[1]).first()
     if req:
-        return MessagesEnum.already_exists
-    req = Requests(user=form.get('user'), time=form.get('time'), pers_data=form.get('link'),
+        return {"result": MessagesEnum.already_exists}
+    req = Requests(user=form.get('user'), time=full_date_time[1], pers_data=form.get('link'),
                    comment=form.get('comment'), id_dates=date.id)
     db.session.add(req)
     db.session.commit()
-    return MessagesEnum.success
+    return {"result": MessagesEnum.success}

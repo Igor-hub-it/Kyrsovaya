@@ -8,14 +8,14 @@ db = SQLAlchemy(app)
 
 
 class Dates(db.Model):
-    id = db.Column(db.BIGINT, primary_key=True)
+    id = db.Column(db.INTEGER, primary_key=True, autoincrement=True)
     date = db.Column(db.String(10), unique=True)
 
 
 class Requests(db.Model):
-    id = db.Column(db.BIGINT, primary_key=True)
+    id = db.Column(db.INTEGER, primary_key=True, autoincrement=True)
     user = db.Column(db.String(USER_LENGTH), nullable=False)
     time = db.Column(db.String(5), nullable=False)
     pers_data = db.Column(db.String(30))
     comment = db.Column(db.String(200))
-    id_dates = db.Column(db.BIGINT, nullable=False)
+    id_dates = db.Column(db.INTEGER, nullable=False)
