@@ -13,6 +13,21 @@ function calendarRequest(day, month, year) {
 }
 
 
-function reqWindowRequest() {
-
+function reqWindowRequest(in_data) {
+    const request = new XMLHttpRequest();
+    request.open('CREATE_REQ', '/');
+    request.onload = () => {
+        const data = JSON.parse(request.responseText);
+        if (data.result === "success") {
+            alert("Успешно добавлено");
+        } else {
+            alert("У вас уже есть заявка на это время.");
+        }
+    }
+    const data = new FormData();
+    data.append('user', in_data.user)
+    data.append('date', in_data.date)
+    data.append('comment', in_data.comment)
+    data.append('link', in_data.link)
+    request.send(data);
 }
