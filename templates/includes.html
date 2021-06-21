@@ -1,8 +1,8 @@
-{% include 'base.html' %}
-{% include 'header.html' %}
-<script src="../static/scripts/user.js"></script>
-{% include 'first_block.html' %}
-{% include 'calendar.html' %}
-{% include 'request_window.html' %}
-{% include 'req_maker.html' %}
-{% include 'footer.html' %}
+{% extends 'base.html' %}
+{% block content %}
+    <script src="../static/scripts/user.js"></script>
+    {% include 'first_block.html' %}
+    {% include 'calendar.html' %}
+    {% include 'request_window.html' %}
+    {% include 'req_maker.html' %}
+{% endblock %}

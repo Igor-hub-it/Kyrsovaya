@@ -24,6 +24,9 @@ def includes():
 def manual():
     return render_template('manual.html')
 
+@app.route('/registration')
+def registration():
+    return render_template('registration.html')
 
 @app.route('/', methods=['CALENDAR', 'CREATE_REQ'])
 def includes_request():
