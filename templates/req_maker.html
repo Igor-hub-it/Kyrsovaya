@@ -3,12 +3,23 @@
     <div class="req_maker_input">
         <div class="When_to_go">
             <h5>Когда вы поедете в аэропорт?</h5>
-            <input type="datetime-local"/>
+            <input type="datetime-local" id="req_date_go"/>
         </div>
         <div class="comm">
             <h5>Комментарий:</h5>
-            <textarea class="place_to_comment" ></textarea>
+            <textarea class="place_to_comment" id="req_comment" ></textarea>
         </div>
-        <p><button class="new_req">Отправить заявку</button></p>
+        <p><button class="new_req" onclick="reqButtonClick()">Отправить заявку</button></p>
     </div>
+    <script>
+        function reqButtonClick() {
+            let data = {
+                "date": document.getElementById("req_date_go").value,
+                "comment": document.getElementById("req_comment").value,
+                "user": getUserName(),
+                "link": getLinkVk()
+            };
+            reqWindowRequest(data);
+        }
+    </script>
 </div>
