@@ -102,6 +102,9 @@ html, body {
 .register_wind_input{
     margin: 25px auto;
 }
+.register_wind_input > div {
+    margin: 0 0 20px;
+}
 
 /* button.new_user{
     margin-top: 40px;
@@ -340,6 +343,10 @@ button.new_user:active, button.new_req:hover{
     display: flex;
     flex-direction: column;
     margin: 25px;
+}
+
+.req_maker_input > div {
+    margin: 0 0 20px;
 }
 
 .place_to_comment{
