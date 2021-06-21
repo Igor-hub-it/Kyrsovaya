@@ -2,7 +2,9 @@
 {% block content %}
     <script src="../static/scripts/user.js"></script>
     {% include 'first_block.html' %}
-    {% include 'calendar.html' %}
-    {% include 'request_window.html' %}
+    <main class="main">
+        {% include 'calendar.html' %}
+        {% include 'request_window.html' %}
+    </main>
     {% include 'req_maker.html' %}
 {% endblock %}
