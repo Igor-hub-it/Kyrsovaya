@@ -311,7 +311,7 @@ button.new_user:active, button.new_req:hover{
     padding: 10px;
     margin-bottom: 12px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column
 }
 
 .requests{
