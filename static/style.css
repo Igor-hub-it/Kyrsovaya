@@ -137,7 +137,6 @@ html, body {
 /* button.new_user:hover:not(:active){
     background: linear-gradient(rgb(126,126,134), rgb(70,71,76)) rgb(126,126,134);
 }
-
 button.new_user:active, button.new_req:hover{
     top: 1px;
     background: linear-gradient(rgb(76,77,82), rgb(56,57,62)) rgb(76,77,82);
@@ -249,7 +248,7 @@ button.new_user:active, button.new_req:hover{
     text-align: center;
     font-size: 15px;
     border-radius: 50%;
-    border: 1px solid rgba(0,0,0,0) 
+    border: 1px solid rgba(0,0,0,0)
 }
 
 .day:hover{
@@ -301,6 +300,10 @@ button.new_user:active, button.new_req:hover{
     .comment{
         margin-top: 20px;
     }
+}
+
+.comment {
+    max-width: 500px;
 }
 
 .req{
@@ -390,7 +393,6 @@ button.new_req, button.sign_up, button.log_in, button.new_user{
 /* button.new_req:hover:not(:active){
     background: linear-gradient(rgb(126,126,134), rgb(70,71,76)) rgb(126,126,134);
 }
-
 button.new_req:active, button.new_req:hover{
     top: 1px;
     background: linear-gradient(rgb(76,77,82), rgb(56,57,62)) rgb(76,77,82);

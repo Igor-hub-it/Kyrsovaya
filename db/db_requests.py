@@ -45,3 +45,7 @@ def calendar_request_set(form: MultiDict):
     db.session.add(req)
     db.session.commit()
     return {"result": MessagesEnum.success}
+
+
+def user_requests():
+    pass
