@@ -8,21 +8,21 @@
     <form method="POST" action="" class="register_wind_input">
         {{ form.csrf_token }}
         <div class="username">
-            <h5>Имя:</h5>
+            <h5>{{ form.login.label }}</h5>
             {{ form.login() }}
             {% for error in form.login.errors %}
                 {{ error }}
             {% endfor %}
         </div>
         <div class="password">
-            <h5>Пароль:</h5>
+            <h5>{{ form.password.label }}</h5>
             {{ form.password() }}
             {% for error in form.password.errors %}
                 {{ error }}
             {% endfor %}
         </div>
         <div class="vklink">
-            <h5>Ссылка на профиль Вконтакте:</h5>
+            <h5>{{ form.vk_link.label }}</h5>
             {{ form.vk_link() }}
             {% for error in form.vk_link.errors %}
                 {{ error }}
