@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="register_wind">
+    <div class="title_of_register_wind">
+        Вход
+    </div>
+    <form method="POST" action="" class="register_wind_input">
+        {{ form.csrf_token }}
+        <div class="username">
+            <h5>{{ form.login.label }}</h5>
+            {{ form.login() }}
+            {% for error in form.login.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        <div class="password">
+            <h5>{{ form.password.label }}</h5>
+            {{ form.password() }}
+            {% for error in form.password.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.remember }}
+            <h5>{{ form.remember.label }}</h5>
+        </div>
+        <p><button class="new_user" type="submit">Вход</button></p>
+    </form>
+</div>
+{% endblock %}
