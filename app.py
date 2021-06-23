@@ -1,6 +1,6 @@
 import os.path
 from flask import Flask, render_template, redirect, request, jsonify
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user, user_login_confirmed
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 # from flask_bootstrap import Bootstrap
 import form.logon as log_form
 
@@ -40,6 +40,8 @@ def manual():
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
+    if current_user.is_authenticated:
+        return redirect('/')
     reg_form = log_form.RegisterForm()
     if reg_form.validate_on_submit():
         user_login = reg_form.login.data
@@ -53,13 +55,15 @@ def registration():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect('/')
     login_form = log_form.LoginForm()
     if login_form.validate_on_submit():
         user_login = login_form.login.data
         password = login_form.password.data
         result = reqs.user_get(user_login, password)
         if result:
-            login_user(result, remember=False)
+            login_user(result, remember=login_form.remember.data)
             return redirect('/')
     return render_template('login.html', header_key="login", form=login_form)
 

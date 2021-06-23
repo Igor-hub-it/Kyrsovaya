@@ -99,8 +99,6 @@ def is_exists_request(form: MultiDict):
             f_date[0] = '0' + f_date[0]
         if len(f_date[1]) == 1:
             f_date[1] = '0' + f_date[1]
-        print(f_date[0], f_date[1], f_date[2])
-        print(conv_date(f_date[0], f_date[1], f_date[2]))
         dates = Dates.query.filter_by(date=conv_date(f_date[0], f_date[1], f_date[2])).first()
         if dates:
             res[i] = {"exist": True}
