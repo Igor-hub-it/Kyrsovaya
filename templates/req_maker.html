@@ -23,8 +23,8 @@
                 "date": date.value,
                 "time": time.value,
                 "comment": comment.value,
-                "user": getUserName(),
-                "link": getLinkVk()
+                "user": '{{ username }}',
+                "link": '{{ link_vk }}'
             };
             reqWindowRequest(data);
         }

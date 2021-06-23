@@ -29,7 +29,7 @@ def load_user(user_id):
 @app.route('/')
 @login_required
 def includes():
-    return render_template('includes.html')
+    return render_template('includes.html', username=current_user.user, link_vk=current_user.pers_data)
 
 
 @app.route('/manual')
