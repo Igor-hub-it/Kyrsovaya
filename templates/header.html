@@ -5,10 +5,19 @@
                 <img src="../static/img/logo.png" alt="Pegasus" width="120">
             </a>
             <div class="button_nav">
-                <a href="{{ url_for('login') }}"><button class="log_in">Вход</button></a>
-                <a href="{{ url_for('logout') }}"><button class="log_out">Выход</button></a>
-                <a href="{{ url_for('registration') }}"><button class="sign_up">Регистрация</button></a>
-                <a href="{{ url_for('personal_area') }}"><button class="personal_area_button">Кабинет</button></a>
+                {% if header_key == "login" %}
+                    <a href="{{ url_for('registration') }}"><button class="sign_up">Регистрация</button></a>
+                {% endif %}
+                {% if header_key == "registration" %}
+                    <a href="{{ url_for('login') }}"><button class="log_in">Вход</button></a>
+                {% endif %}
+                {% if header_key == "includes" %}
+                    <a href="{{ url_for('logout') }}"><button class="log_out">Выход</button></a>
+                    <a href="{{ url_for('personal_area') }}"><button class="personal_area_button">Кабинет</button></a>
+                {% endif %}
+                {% if header_key == "personal_area" %}
+                    <a href="{{ url_for('logout') }}"><button class="log_out">Выход</button></a>
+                {% endif %}
             </div>
         </div>
     </nav>

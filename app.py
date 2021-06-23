@@ -1,6 +1,6 @@
 import os.path
 from flask import Flask, render_template, redirect, request, jsonify
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user, user_login_confirmed
 # from flask_bootstrap import Bootstrap
 import form.logon as log_form
 
@@ -29,7 +29,8 @@ def load_user(user_id):
 @app.route('/')
 @login_required
 def includes():
-    return render_template('includes.html', username=current_user.user, link_vk=current_user.pers_data)
+    return render_template('includes.html', header_key="includes",
+                           username=current_user.user, link_vk=current_user.pers_data)
 
 
 @app.route('/manual')
@@ -39,8 +40,6 @@ def manual():
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
-    if current_user:
-        return redirect('/')
     reg_form = log_form.RegisterForm()
     if reg_form.validate_on_submit():
         user_login = reg_form.login.data
@@ -49,13 +48,11 @@ def registration():
         result = reqs.user_add(user_login, password, vk_link)
         if result == reqs.MessagesEnum.success:
             return redirect('/login')
-    return render_template('registration.html', form=reg_form)
+    return render_template('registration.html', header_key="registration", form=reg_form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user:
-        return redirect('/')
     login_form = log_form.LoginForm()
     if login_form.validate_on_submit():
         user_login = login_form.login.data
@@ -64,7 +61,7 @@ def login():
         if result:
             login_user(result, remember=False)
             return redirect('/')
-    return render_template('login.html', form=login_form)
+    return render_template('login.html', header_key="login", form=login_form)
 
 
 @app.route('/', methods=['CALENDAR', 'CREATE_REQ', 'DATE_REQS'])
@@ -95,7 +92,8 @@ def logout():
 @app.route('/personal_area')
 @login_required
 def personal_area():
-    return render_template('personal_area.html', form=reqs.user_list_of_request(current_user.user))
+    return render_template('personal_area.html', header_key="personal_area",
+                           form=reqs.user_list_of_request(current_user.user))
 
 
 if __name__ == "__main__":
