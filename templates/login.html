@@ -10,14 +10,14 @@
             <h5>{{ form.login.label }}</h5>
             {{ form.login() }}
             {% for error in form.login.errors %}
-                {{ error }}
+                <div class="errors">{{ error }}</div>
             {% endfor %}
         </div>
         <div class="password">
             <h5>{{ form.password.label }}</h5>
             {{ form.password() }}
             {% for error in form.password.errors %}
-                {{ error }}
+                <div class="errors">{{ error }}</div>
             {% endfor %}
         </div>
         <div>

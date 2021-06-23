@@ -85,5 +85,10 @@ def logout():
     return redirect('/login')
 
 
+@app.route('/personal_area')
+def personal_area():
+    return render_template('personal_area.html')
+
+
 if __name__ == "__main__":
     app.run()
