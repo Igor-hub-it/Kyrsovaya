@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style_about.css">
+    <link rel="icon" href="../static/img/favicon.png" type="image/x-icon">
+    <title>О нас</title>
+</head>
+<body>
+    <div id="app">
+    <header class="header-global">
+        <nav class="navbar">
+            <div class="container">
+                <a href="{{ url_for('includes') }}">
+                    <img src="../static/img/logo.png" alt="Pegasus" width="120">
+                </a>
+            </div>
+        </nav>
+    </header>
+</div>
+<div class="f_block">
+    <div class="f_block_in">
+        <h2>
+            Здесь хранится информация о создателях сайта :)
+        </h2>
+    </div>
+</div>
+<br>
+<div class="block">
+    <div class="block_in">
+        <div id="block_l">
+            <div class="container">
+                <div class="text">
+                    <img src="../static/img/Or_Igor.png" alt="Avatar">
+                    <h3>
+                        И. Пигидин 
+                    </h3>
+                    <p> 
+                        TeamLead, Frontend 
+                    </p> 
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="block">
+    <div class="block_in">
+        <div class="container">
+            <div class="text">
+                <img src="../static/img/Or_Artem.png" alt="Avatar">
+                <h3>
+                    А. Ерофеев 
+                </h3>
+                <p> 
+                    Backend 
+                </p>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="block">
+    <div class="block_in">
+        <div class="container">
+            <div class="text">
+                <img src="../static/img/Or_Anastasia.png" alt="Avatar">
+                <h3>
+                    А. Кокарева 
+                </h3>
+                <p> 
+                    Designer, Full stack, Documentation 
+                </p>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
