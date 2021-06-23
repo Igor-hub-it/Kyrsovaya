@@ -78,5 +78,12 @@ def includes_request():
     return "Unexpected error"
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/login')
+
+
 if __name__ == "__main__":
     app.run()
