@@ -43,6 +43,15 @@ p
     margin-left: auto;
 }
 
+.container_p
+{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 main
 {
     margin-top: 30px;
@@ -119,15 +128,13 @@ main
     }
 }
 
-.container::after 
-{
+.container_p::after {
     content: "";
     clear: both;
     display: table;
 }
 
-.container img 
-{
+.container_p img {
     float: left;
     max-width: 70px;
     width: 70%;
@@ -137,10 +144,10 @@ main
 
 @media (max-width: 1233px)
 {
-    .container img
+    .container_p img
     {
         float: right;
-        max-width: 80px;
+        max-width: 70px;
         width: 100%;
         margin-left: 0px;
     }
