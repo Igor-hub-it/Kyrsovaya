@@ -256,7 +256,7 @@ button.new_user:active, button.new_req:hover{
     color: #2c2c2c;
     transition: 1s;
     cursor: pointer;
-    border: 1px solid yellow;
+
 }
 
 .selected_day{
@@ -269,6 +269,10 @@ button.new_user:active, button.new_req:hover{
     text-align: center;
     font-size: 15px;
     border-radius: 50%;
+}
+
+.day_with_req{
+    border: 1px solid yellow;
 }
 
 .request_window{
