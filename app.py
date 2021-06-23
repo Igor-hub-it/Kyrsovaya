@@ -18,7 +18,7 @@ from db.db_models import User
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'registration'
+login_manager.login_view = 'login'
 
 
 @login_manager.user_loader
@@ -41,16 +41,30 @@ def manual():
 def registration():
     reg_form = log_form.RegisterForm()
     if reg_form.validate_on_submit():
-        login = reg_form.login.data
+        user_login = reg_form.login.data
         password = reg_form.password.data
         vk_link = reg_form.vk_link.data
-        result = reqs.user_requests(login, password, vk_link)
+        result = reqs.user_add_request(user_login, password, vk_link)
         if result == reqs.MessagesEnum.success:
-            return redirect('/')
+            return redirect('/login')
     return render_template('registration.html', form=reg_form)
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    login_form = log_form.LoginForm()
+    if login_form.validate_on_submit():
+        user_login = login_form.login.data
+        password = login_form.password.data
+        result = reqs.user_get_request(user_login, password)
+        if result:
+            login_user(result, remember=False)
+            return redirect('/')
+    return render_template('login.html', form=login_form)
+
+
 @app.route('/', methods=['CALENDAR', 'CREATE_REQ'])
+@login_required
 def includes_request():
     print(request.method)
     if request.method == 'CALENDAR':

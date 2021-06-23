@@ -5,7 +5,8 @@ from hashlib import sha3_512
 
 def conv_password(password):
     salt = "924728_PEGASUS_d_r34"
-    return sha3_512(salt + password)
+    password = salt + password
+    return sha3_512(str(password).encode('utf-8')).hexdigest()
 
 
 class MessagesEnum:
@@ -53,11 +54,21 @@ def calendar_request_set(form: MultiDict):
     return {"result": MessagesEnum.success}
 
 
-def user_requests(user: str, password: str, vk_link: str):
-    new_user = User.query.filter_by(user=user)
+# noinspection PyArgumentList
+def user_add_request(username: str, password: str, vk_link: str):
+    new_user = User.query.filter_by(user=username).first()
     if new_user:
         return MessagesEnum.already_exists
     password = conv_password(password)
-    new_user = User(user_name=user, password=password, pers_data=vk_link)
+    new_user = User(user=username, password=password, pers_data=vk_link)
     db.session.add(new_user)
     db.session.commit()
+    return MessagesEnum.success
+
+
+def user_get_request(username: str, password: str):
+    user = User.query.filter_by(user=username).first()
+    if user:
+        if user.password == conv_password(password):
+            return user
+    return None
