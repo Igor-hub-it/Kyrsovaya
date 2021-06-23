@@ -2,11 +2,14 @@
     <div class="title_of_register_wind">
         Регистрация
     </div>
+    <form>
     <div class="register_wind_input">
-        <div class="username">
+        {{ form.username().label() }}
+        {{ form.username() }}
+        <!--<div class="username">
             <h5>Имя:</h5>
-            <input type="text">   
-        </div>
+            <input type="text">-->
+    </div>
         <div class="password">
             <h5>Пароль:</h5>
             <input type="password">   
@@ -16,5 +19,6 @@
             <input type="text">   
         </div>
         <p><button class="new_user">Зарегистрироваться</button></p>
+    </form>
     </div>
 </div>

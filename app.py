@@ -1,6 +1,7 @@
 import os.path
 from flask import Flask, render_template, redirect, request, jsonify
-# from flask_sqlalchemy import SQLAlchemy
+# from flask_bootstrap import Bootstrap
+import form.logon as log_form
 
 
 basedir = os.path.abspath(os.path.dirname(__file__)) + '/db'
@@ -25,9 +26,16 @@ def manual():
     return render_template('manual.html')
 
 
-@app.route('/registration')
+@app.route('/registration', methods=['GET', 'POST'])
 def registration():
-    return render_template('registration.html')
+    reg_form = log_form.RegisterForm()
+    if reg_form.is_submitted():
+        login = reg_form.login.data
+        password = reg_form.password.data
+        vk_link = reg_form.vk_link.data
+        print(login, password, vk_link)
+        return redirect('/')
+    return render_template('registration.html', form=reg_form)
 
 
 @app.route('/', methods=['CALENDAR', 'CREATE_REQ'])
