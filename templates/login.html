@@ -5,6 +5,9 @@
         Вход
     </div>
     <form method="POST" action="" class="register_wind_input">
+        {% for message in  get_flashed_messages() %}
+            <h6>{{ message }}</h6>
+        {% endfor %}
         {{ form.csrf_token }}
         <div class="username">
             <h5>{{ form.login.label }}</h5>

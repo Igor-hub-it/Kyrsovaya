@@ -92,7 +92,7 @@ def user_list_of_request(username: str):
 
 
 def is_exists_request(form: MultiDict):
-    res = [{"exist": False} for i in range(42)]
+    res = [{"exist": False} for _ in range(42)]
     for i in range(42):
         f_date = form.get(str(i)).split('-')
         if len(f_date[0]) == 1:

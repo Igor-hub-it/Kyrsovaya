@@ -1,5 +1,5 @@
 import os.path
-from flask import Flask, render_template, redirect, request, jsonify
+from flask import Flask, render_template, redirect, request, jsonify, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 # from flask_bootstrap import Bootstrap
 import form.logon as log_form
@@ -50,6 +50,9 @@ def registration():
         result = reqs.user_add(user_login, password, vk_link)
         if result == reqs.MessagesEnum.success:
             return redirect('/login')
+        else:
+            flash("Пользователь уже существует", "error")
+            return render_template('registration.html', header_key="registration", form=reg_form)
     return render_template('registration.html', header_key="registration", form=reg_form)
 
 
@@ -65,6 +68,9 @@ def login():
         if result:
             login_user(result, remember=login_form.remember.data)
             return redirect('/')
+        else:
+            flash("Неправильное имя пользователя или пароль", "error")
+            return render_template('login.html', header_key="login", form=login_form)
     return render_template('login.html', header_key="login", form=login_form)
 
 
