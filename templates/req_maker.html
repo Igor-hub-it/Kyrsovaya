@@ -16,9 +16,13 @@
     </div>
     <script>
         function reqButtonClick() {
+            let date = document.getElementById("req_date_go");
+            let time = document.getElementById("req_time_go");
+            let comment = document.getElementById("req_comment");
             let data = {
-                "date": document.getElementById("req_date_go").value,
-                "comment": document.getElementById("req_comment").value,
+                "date": date.value,
+                "time": time.value,
+                "comment": comment.value,
                 "user": getUserName(),
                 "link": getLinkVk()
             };

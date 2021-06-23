@@ -27,6 +27,7 @@ function reqWindowRequest(in_data) {
     const data = new FormData();
     data.append('user', in_data.user)
     data.append('date', in_data.date)
+    data.append('time', in_data.time)
     data.append('comment', in_data.comment)
     data.append('link', in_data.link)
     request.send(data);

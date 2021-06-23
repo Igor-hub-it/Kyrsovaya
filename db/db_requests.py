@@ -23,7 +23,7 @@ def calendar_request_get(form: MultiDict):
         month = '0' + month
     year = form.get('year')
     print(day, month, year)
-    date = Dates.query.filter_by(date=(str(day) + '.' + str(month) + '.' + str(year))).first()
+    date = Dates.query.filter_by(date=(str(year) + '-' + str(month) + '-' + str(day))).first()
     if date:
         req = Requests.query.filter_by(id_dates=date.id).all()
         res = []
@@ -35,27 +35,28 @@ def calendar_request_get(form: MultiDict):
 
 
 def calendar_request_set(form: MultiDict):
-    full_date_time = form.get('date').split(' ')
-    print(full_date_time)
-    date = Dates.query.filter_by(date=full_date_time[0]).first()
-    if not date:
-        date = Dates(date=full_date_time[0])
-        db.session.add(date)
+    date = form.get('date')
+    time = form.get('time')
+    print(date, time)
+    date_row = Dates.query.filter_by(date=date).first()
+    if not date_row:
+        date_row = Dates(date=date)
+        db.session.add(date_row)
         db.session.commit()
-    print(date.id)
+    print(date_row.id)
     # date = Dates.query.filter_by(date=full_date_time[0]).first()
-    req = Requests.query.filter_by(id_dates=date.id, user=form.get('user'), time=full_date_time[1]).first()
+    req = Requests.query.filter_by(id_dates=date_row.id, user=form.get('user'), time=time).first()
     if req:
         return {"result": MessagesEnum.already_exists}
-    req = Requests(user=form.get('user'), time=full_date_time[1], pers_data=form.get('link'),
-                   comment=form.get('comment'), id_dates=date.id)
+    req = Requests(user=form.get('user'), time=time, pers_data=form.get('link'),
+                   comment=form.get('comment'), id_dates=date_row.id)
     db.session.add(req)
     db.session.commit()
     return {"result": MessagesEnum.success}
 
 
 # noinspection PyArgumentList
-def user_add_request(username: str, password: str, vk_link: str):
+def user_add(username: str, password: str, vk_link: str):
     new_user = User.query.filter_by(user=username).first()
     if new_user:
         return MessagesEnum.already_exists
@@ -66,9 +67,17 @@ def user_add_request(username: str, password: str, vk_link: str):
     return MessagesEnum.success
 
 
-def user_get_request(username: str, password: str):
+def user_get(username: str, password: str):
     user = User.query.filter_by(user=username).first()
     if user:
         if user.password == conv_password(password):
             return user
     return None
+
+
+def user_list_of_request(username: str):
+    requests = Requests.query.filter_by(user=username).all()
+    date_time = []
+    for req in requests:
+        date = Dates.query.filter_by(id=req.id_dates).first()
+        date_time.append(date.date)

@@ -44,7 +44,7 @@ def registration():
         user_login = reg_form.login.data
         password = reg_form.password.data
         vk_link = reg_form.vk_link.data
-        result = reqs.user_add_request(user_login, password, vk_link)
+        result = reqs.user_add(user_login, password, vk_link)
         if result == reqs.MessagesEnum.success:
             return redirect('/login')
     return render_template('registration.html', form=reg_form)
@@ -56,7 +56,7 @@ def login():
     if login_form.validate_on_submit():
         user_login = login_form.login.data
         password = login_form.password.data
-        result = reqs.user_get_request(user_login, password)
+        result = reqs.user_get(user_login, password)
         if result:
             login_user(result, remember=False)
             return redirect('/')
