@@ -366,11 +366,11 @@ button.new_user:active, button.new_req:hover{
     max-height: 15em;
 }
 
-button.sign_up{
-    margin-left: 5%;
+button.sign_up, button.log_in, button.log_out, button.personal_area_button{
+    margin-left: 7px;
 }
 
-button.new_req, button.sign_up, button.log_in, button.log_out, button.new_user{
+button.new_req, button.sign_up, button.log_in, button.log_out, button.personal_area_button, button.new_user{
     position: relative;
     display: inline-block;
     font-size: 90%;
