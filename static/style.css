@@ -270,6 +270,11 @@ button.new_user:active, button.new_req:hover{
 
 .day_with_req{
     color: yellow;
+    min-width: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 50%;
 }
 
 .request_window{
