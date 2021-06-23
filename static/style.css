@@ -417,6 +417,7 @@ button.new_req:active, button.new_req:hover{
 
 .errors{
     margin-top: 20px;
+    font-size: 12px;
 }
 
 .personal_area_wind{
