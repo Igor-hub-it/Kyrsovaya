@@ -39,6 +39,8 @@ def manual():
 
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
+    if current_user:
+        return redirect('/')
     reg_form = log_form.RegisterForm()
     if reg_form.validate_on_submit():
         user_login = reg_form.login.data
@@ -52,6 +54,8 @@ def registration():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user:
+        return redirect('/')
     login_form = log_form.LoginForm()
     if login_form.validate_on_submit():
         user_login = login_form.login.data
@@ -63,10 +67,13 @@ def login():
     return render_template('login.html', form=login_form)
 
 
-@app.route('/', methods=['CALENDAR', 'CREATE_REQ'])
+@app.route('/', methods=['CALENDAR', 'CREATE_REQ', 'DATE_REQS'])
 @login_required
 def includes_request():
     print(request.method)
+    if request.method == 'DATE_REQS':
+        res = reqs.is_exists_request(request.form)
+        return jsonify(res)
     if request.method == 'CALENDAR':
         res = reqs.calendar_request_get(request.form)
         return jsonify(res)
@@ -86,8 +93,9 @@ def logout():
 
 
 @app.route('/personal_area')
+@login_required
 def personal_area():
-    return render_template('personal_area.html')
+    return render_template('personal_area.html', form=reqs.user_list_of_request(current_user.user))
 
 
 if __name__ == "__main__":

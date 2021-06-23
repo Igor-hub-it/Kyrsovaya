@@ -11,10 +11,12 @@ const DAY_NAME=[
 const CALENDAR_ID='calendar';
 
 let selectedDate = {
-    'Day' : null,
+    'Day' : new Date().getDate(),
     'Month' : new Date().getMonth(),
     'Year' : new Date().getFullYear()
 };
+
+let have_req_array;
 
 function selectDate(day, month, year) {
     selectedDate = {
@@ -22,8 +24,7 @@ function selectDate(day, month, year) {
         'Month' : month,
         'Year' : year
     };
-    drawCalendar(month,year);
-    calendarRequest(day, month + 1, year);
+    fillAndRequest(month, year);
 }
 
 function countMonth(month) {
@@ -46,9 +47,50 @@ function countYear(month, year) {
     return year;
 }
 
+function fillAndRequest(month, year) {
+    let req = []
+    let totalDays = 32 - new Date(year, month, 32).getDate();
+    let totalDaysPrevMonth = 32 - new Date(year, month - 1, 32).getDate();
+    let start_day = new Date(year, month, 1).getDay();
+
+    if (start_day === 0) {
+        start_day = 7;
+    }
+    --start_day;
+
+    let day = 0;
+    let index = 0;
+    let dayNextMonth = 0;
+
+    for (let i = 1; i < 7; ++i) {
+        for (let j = 0; j < 7; ++j) {
+            let num_day;
+            let param_month;
+            let param_year;
+            if (index < start_day) {
+                num_day = totalDaysPrevMonth - (start_day - index - 1);
+                param_month = countMonth(month - 1);
+                param_year = countYear(month - 1, year);
+            } else if (index >= totalDays + start_day) {
+                num_day = ++dayNextMonth;
+                param_month = countMonth(month + 1);
+                param_year = countYear(month + 1, year);
+            } else {
+                num_day = ++day;
+                param_month = month;
+                param_year = year;
+            }
+            let param = num_day + '-' + (param_month + 1) + '-' + param_year;
+            req.push(param)
+            ++index;
+        }
+    }
+    getDateRequests(req);
+}
+
 function drawCalendar(month, year) {
     let months = [countMonth(month - 1), countMonth(month + 1)];
-    let years = [countYear(month - 1, year), countYear(month + 1, year)]
+    let years = [countYear(month - 1, year), countYear(month + 1, year)];
 
     let tmp='';
 
@@ -124,6 +166,9 @@ function drawCalendar(month, year) {
                 param_month = month;
                 param_year = year;
             }
+            if (have_req_array.result[index].exist) {
+                className = 'day_with_req'
+            }
             if (selectedDate.Day === num_day && selectedDate.Month === param_month &&
                 selectedDate.Year === param_year) {
                 className = 'selected_day'
@@ -140,7 +185,7 @@ function drawCalendar(month, year) {
     document.getElementById(CALENDAR_ID).innerHTML = tmp;
 }
 
-drawCalendar(selectedDate.Month, selectedDate.Year);
+selectDate(selectedDate.Day, selectedDate.Month, selectedDate.Year);
 
 /*function backToCurrentMonth() {
     selectedDate = {

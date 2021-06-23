@@ -6,14 +6,23 @@
         Ваши заявки
     </div>
     <div class="personal_area_reqs">
-        <div class="personal_area_req">
-            <div class="personal_area_req_datatime">
-                12-05-21 12:12
+        {% if form.get('exist') %}
+            {% for f in form.get('requests') %}
+                <div class="personal_area_req">
+                    <div class="personal_area_req_datatime">
+                        {{f.get('date')}}
+                        {{f.get('time')}}
+                    </div>
+                    <div class="personal_area_req_comment">
+                        {{f.get('comment')}}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="personal_area_req">
+                У вас нет ни одной завки(
             </div>
-            <div class="personal_area_req_comment">
-                loremjvjenifvuneifuvn euvibeivu evfeubfv vejvbjbe hdgfkjhg dkhf gei hgdkjfh gdfghdfgk jhdfk dfh gdkdv efvhebv eve vhv  vdrgtgb rtbrtb retb rbtet bebb.
-            </div>
-        </div>
+        {% endif %}
     </div>
 </div>
 </div>

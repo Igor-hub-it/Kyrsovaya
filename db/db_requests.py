@@ -3,6 +3,10 @@ from werkzeug.datastructures import MultiDict
 from hashlib import sha3_512
 
 
+def conv_date(day: str, month: str, year: str):
+    return str(year) + '-' + str(month) + '-' + str(day)
+
+
 def conv_password(password):
     salt = "924728_PEGASUS_d_r34"
     password = salt + password
@@ -13,7 +17,8 @@ class MessagesEnum:
     does_not_exist = "does not exist"
     already_exists = "already exists"
     success = "success"
-    # result = "result"
+    exist = "exist"
+    result = "result"
 
 
 def calendar_request_get(form: MultiDict):
@@ -23,7 +28,7 @@ def calendar_request_get(form: MultiDict):
         month = '0' + month
     year = form.get('year')
     print(day, month, year)
-    date = Dates.query.filter_by(date=(str(year) + '-' + str(month) + '-' + str(day))).first()
+    date = Dates.query.filter_by(date=conv_date(day, month, year)).first()
     if date:
         req = Requests.query.filter_by(id_dates=date.id).all()
         res = []
@@ -47,12 +52,12 @@ def calendar_request_set(form: MultiDict):
     # date = Dates.query.filter_by(date=full_date_time[0]).first()
     req = Requests.query.filter_by(id_dates=date_row.id, user=form.get('user'), time=time).first()
     if req:
-        return {"result": MessagesEnum.already_exists}
+        return {MessagesEnum.result: MessagesEnum.already_exists}
     req = Requests(user=form.get('user'), time=time, pers_data=form.get('link'),
                    comment=form.get('comment'), id_dates=date_row.id)
     db.session.add(req)
     db.session.commit()
-    return {"result": MessagesEnum.success}
+    return {MessagesEnum.result: MessagesEnum.success}
 
 
 # noinspection PyArgumentList
@@ -77,7 +82,26 @@ def user_get(username: str, password: str):
 
 def user_list_of_request(username: str):
     requests = Requests.query.filter_by(user=username).all()
-    date_time = []
+    res = []
+    if not requests:
+        return {MessagesEnum.exist: False}
     for req in requests:
         date = Dates.query.filter_by(id=req.id_dates).first()
-        date_time.append(date.date)
+        res.append({'date': date.date, 'time': req.time, 'comment': req.comment})
+    return {MessagesEnum.exist: True, "requests": res}
+
+
+def is_exists_request(form: MultiDict):
+    res = [{"exist": False} for i in range(42)]
+    for i in range(42):
+        f_date = form.get(str(i)).split('-')
+        if len(f_date[0]) == 1:
+            f_date[0] = '0' + f_date[0]
+        if len(f_date[1]) == 1:
+            f_date[1] = '0' + f_date[1]
+        print(f_date[0], f_date[1], f_date[2])
+        print(conv_date(f_date[0], f_date[1], f_date[2]))
+        dates = Dates.query.filter_by(date=conv_date(f_date[0], f_date[1], f_date[2])).first()
+        if dates:
+            res[i] = {"exist": True}
+    return {MessagesEnum.result: res}

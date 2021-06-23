@@ -32,3 +32,18 @@ function reqWindowRequest(in_data) {
     data.append('link', in_data.link)
     request.send(data);
 }
+
+function getDateRequests(in_data) {
+    const request = new XMLHttpRequest();
+    request.open('DATE_REQS', '/');
+    request.onload = () => {
+        have_req_array = JSON.parse(request.responseText);
+        drawCalendar(selectedDate.Month, selectedDate.Year);
+        calendarRequest(selectedDate.Day, selectedDate.Month + 1, selectedDate.Year);
+    }
+    const data = new FormData();
+    for (let i = 0; i < 42; ++i) {
+        data.append(String(i), in_data[i]);
+    }
+    request.send(data);
+}
