@@ -1,5 +1,6 @@
 import os.path
 from flask import Flask, render_template, redirect, request, jsonify
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 # from flask_bootstrap import Bootstrap
 import form.logon as log_form
 
@@ -12,11 +13,21 @@ app.config['SECRET_KEY'] = "PEGASUS_SECRET_KEY_c1j2f3k6n2v4i5r1j2n2r394o1i2f4h6e
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, "pegasus.db")
 
 
-# import db.db_models
 import db.db_requests as reqs
+from db.db_models import User
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'registration'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 @app.route('/')
+@login_required
 def includes():
     return render_template('includes.html')
 
@@ -29,12 +40,13 @@ def manual():
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     reg_form = log_form.RegisterForm()
-    if reg_form.is_submitted():
+    if reg_form.validate_on_submit():
         login = reg_form.login.data
         password = reg_form.password.data
         vk_link = reg_form.vk_link.data
-        print(login, password, vk_link)
-        return redirect('/')
+        result = reqs.user_requests(login, password, vk_link)
+        if result == reqs.MessagesEnum.success:
+            return redirect('/')
     return render_template('registration.html', form=reg_form)
 
 

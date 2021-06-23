@@ -1,5 +1,11 @@
-from db.db_models import db, Dates, Requests
+from db.db_models import db, Dates, Requests, User
 from werkzeug.datastructures import MultiDict
+from hashlib import sha3_512
+
+
+def conv_password(password):
+    salt = "924728_PEGASUS_d_r34"
+    return sha3_512(salt + password)
 
 
 class MessagesEnum:
@@ -47,5 +53,11 @@ def calendar_request_set(form: MultiDict):
     return {"result": MessagesEnum.success}
 
 
-def user_requests():
-    pass
+def user_requests(user: str, password: str, vk_link: str):
+    new_user = User.query.filter_by(user=user)
+    if new_user:
+        return MessagesEnum.already_exists
+    password = conv_password(password)
+    new_user = User(user_name=user, password=password, pers_data=vk_link)
+    db.session.add(new_user)
+    db.session.commit()

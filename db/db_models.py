@@ -1,5 +1,6 @@
 from app import app
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 
 USER_LENGTH = 15
@@ -22,7 +23,7 @@ class Requests(db.Model):
     id_dates = db.Column(db.INTEGER, nullable=False)
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.INTEGER, primary_key=True, autoincrement=True)
     user = db.Column(db.TEXT(USER_LENGTH), unique=True)
     pers_data = db.Column(db.TEXT(PERS_DATA_LENGTH), unique=True)
