@@ -236,8 +236,6 @@ button.new_user:active, button.new_req:hover{
     text-align: center;
     font-size: 15px;
     text-transform: uppercase;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
     border-bottom: 1px solid #a2a2a2;
     font-weight: 600;
 }
@@ -271,13 +269,7 @@ button.new_user:active, button.new_req:hover{
 }
 
 .day_with_req{
-    min-width: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 50%;
-    border: 1px solid yellow;
-    margin-bottom: 2px;
+    color: yellow;
 }
 
 .request_window{
