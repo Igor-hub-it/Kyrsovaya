@@ -3,7 +3,6 @@ function calendarRequest(day, month, year) {
     request.open('CALENDAR', '/');
     request.onload = () => {
         const data = JSON.parse(request.responseText);
-        console.log(data);
         draw_requests(data);
     }
     const data = new FormData();
@@ -20,6 +19,8 @@ function reqWindowRequest(in_data) {
     request.onload = () => {
         const data = JSON.parse(request.responseText);
         if (data.result === "success") {
+            drawCalendar(selectedDate.Month, selectedDate.Year);
+            calendarRequest(selectedDate.Day, selectedDate.Month + 1, selectedDate.Year);
             alert("Успешно добавлено");
         } else {
             alert("У вас уже есть заявка на это время.");
