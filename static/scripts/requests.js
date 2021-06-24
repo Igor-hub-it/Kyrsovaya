@@ -3,6 +3,7 @@ function calendarRequest(day, month, year) {
     request.open('CALENDAR', '/');
     request.onload = () => {
         const data = JSON.parse(request.responseText);
+        console.log(data);
         draw_requests(data);
     }
     const data = new FormData();

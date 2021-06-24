@@ -26,6 +26,8 @@ def calendar_request_get(form: MultiDict):
     month = form.get('month')
     if len(month) == 1:
         month = '0' + month
+    if len(day) == 1:
+        day = '0' + day
     year = form.get('year')
     print(day, month, year)
     date = Dates.query.filter_by(date=conv_date(day, month, year)).first()
@@ -63,6 +65,9 @@ def calendar_request_set(form: MultiDict):
 # noinspection PyArgumentList
 def user_add(username: str, password: str, vk_link: str):
     new_user = User.query.filter_by(user=username).first()
+    if new_user:
+        return MessagesEnum.already_exists
+    new_user = User.query.filter_by(pers_data=vk_link).first()
     if new_user:
         return MessagesEnum.already_exists
     password = conv_password(password)

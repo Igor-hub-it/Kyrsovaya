@@ -5,6 +5,7 @@
                 <img src="../static/img/logo.png" alt="Pegasus" width="120">
             </a>
             <div class="button_nav">
+                <a href="{{ url_for('about') }}"><button class="sign_up">О нас</button></a>
                 {% if header_key == "login" %}
                     <a href="{{ url_for('registration') }}"><button class="sign_up">Регистрация</button></a>
                 {% endif %}
