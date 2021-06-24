@@ -19,7 +19,7 @@ function draw_requests(data) {
                 '</div>\n';
         }
     } else {
-         tmp = 'It nothing left to say now';
+         tmp = '<div class="nothingtext"> It nothing left to say now </div>';
     }
     document.getElementById("requests").innerHTML = tmp;
 }

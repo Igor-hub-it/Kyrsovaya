@@ -269,6 +269,7 @@ button.new_user:active, button.new_req:hover{
 }
 
 .day_with_req{
+    cursor: pointer;
     color: yellow;
     min-width: 40px;
     line-height: 40px;
@@ -456,4 +457,8 @@ button.new_req:active, button.new_req:hover{
 
 .personal_area_req_comment{
     margin-top: 15px;
+}
+
+.nothingtext{
+    text-align: center;
 }
