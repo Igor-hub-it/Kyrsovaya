@@ -35,7 +35,7 @@ def includes():
 
 @app.route('/manual')
 def manual():
-    return render_template('manual.html')
+    return render_template('manual.html', is_log=current_user.is_authenticated)
 
 
 @app.route('/registration', methods=['GET', 'POST'])
@@ -108,7 +108,7 @@ def personal_area():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html', is_log=current_user.is_authenticated)
 
 
 if __name__ == "__main__":
