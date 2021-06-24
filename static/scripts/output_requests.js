@@ -19,7 +19,7 @@ function draw_requests(data) {
                 '</div>\n';
         }
     } else {
-         tmp = '<div class="nothingtext"> It nothing left to say now </div>';
+         tmp = '<div class="nothingtext"> В этот день пока нет заявок </div>';
     }
     document.getElementById("requests").innerHTML = tmp;
 }
