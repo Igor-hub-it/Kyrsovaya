@@ -35,13 +35,15 @@ function reqWindowRequest(in_data) {
     request.send(data);
 }
 
-function getDateRequests(in_data) {
+function getDateRequests(in_data, month, year) {
     const request = new XMLHttpRequest();
     request.open('DATE_REQS', '/');
     request.onload = () => {
         have_req_array = JSON.parse(request.responseText);
-        drawCalendar(selectedDate.Month, selectedDate.Year);
-        calendarRequest(selectedDate.Day, selectedDate.Month + 1, selectedDate.Year);
+        drawCalendar(month, year);
+        if (month === selectedDate.Month && year === selectedDate.Year) {
+            calendarRequest(selectedDate.Day, selectedDate.Month + 1, selectedDate.Year);
+        }
     }
     const data = new FormData();
     for (let i = 0; i < 42; ++i) {

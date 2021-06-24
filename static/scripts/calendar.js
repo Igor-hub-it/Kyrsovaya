@@ -85,7 +85,7 @@ function fillAndRequest(month, year) {
             ++index;
         }
     }
-    getDateRequests(req);
+    getDateRequests(req, month, year);
 }
 
 function drawCalendar(month, year) {
@@ -96,12 +96,12 @@ function drawCalendar(month, year) {
 
     tmp += '<div class="mounth">\n' +
         '<div class="prev_mounth" ' +
-        'onclick="drawCalendar(' + months[0] + ', ' + years[0] +')">' +
+        'onclick="fillAndRequest(' + months[0] + ', ' + years[0] +')">' +
         '&#171;' +
         '</div>\n' +
         '<div class="cur_mounth">' + MONTH_NAME[month] + '</div>\n' +
         '<div class="next_mounth" ' +
-        'onclick="drawCalendar(' + months[1] + ', ' + years[1] + ')">' +
+        'onclick="fillAndRequest(' + months[1] + ', ' + years[1] + ')">' +
         '&#187;' +
         '</div>\n' +
         '</div>\n';
